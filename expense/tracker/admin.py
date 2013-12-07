@@ -7,6 +7,11 @@ class ItemInline(admin.TabularInline):
     fk_name = 'invoice'
 
 class InvoiceAdmin(admin.ModelAdmin):
+
+   list_display = ('store', 'total', 'date')
+   list_filter = ('store', 'date')
+
+
    inlines = [
            ItemInline,
            ]
