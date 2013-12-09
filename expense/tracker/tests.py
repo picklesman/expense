@@ -8,6 +8,12 @@ class ItemTestCase(TestCase):
         self.store = Store.objects.create(name="Amazon")
         self.invoice = Invoice.objects.create(store=self.store,date="2013-12-11")
 
+
+    def create_item(self, price, quantity):
+        
+        item = Item.objects.create(name="orange glasses", price=price, quantity=quantity, invoice=self.invoice)
+        return item
+
     def test_total_is_correct(self):
 
         price = 20.00
