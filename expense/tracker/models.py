@@ -36,7 +36,8 @@ class Item(models.Model):
     item_total = models.DecimalField(max_digits=6, decimal_places=2, default=0)
 
     def save(self):
-        logger.info("Saving an item!") 
+        logger.info("Saving an item!")
+        self.item_total = self.quantity * self.price
         super(Item,self).save()
 
     def __unicode__(self):
