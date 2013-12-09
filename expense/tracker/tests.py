@@ -23,3 +23,13 @@ class ItemTestCase(TestCase):
         item = self.create_item(price,quantity)
 
         self.assertEqual(item.item_total, total)
+   
+    def test_updating_item_updates_invoice(self):
+        
+        #create a line item, change the quantity and check that the invoice subtotal reflects this
+        item = self.create_item(20,4)
+
+        item.quantity -= 1
+        item.save()
+
+        self.assertEqual(item.invoice.subtotal, item.quantity * item.price)
