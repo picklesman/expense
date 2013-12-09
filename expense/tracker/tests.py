@@ -33,3 +33,16 @@ class ItemTestCase(TestCase):
         item.save()
 
         self.assertEqual(item.invoice.subtotal, item.quantity * item.price)
+
+    def test_deleting_item_updates_invoice(self):
+
+        #create two line items, delete the first and check that the invoice subtotal equals the line item total
+        item = self.create_item(20,5)
+        second = self.create_item(10,4)
+
+        invoice = item.invoice
+    
+        item.delete()
+
+        self.assertEqual(invoice.subtotal, second.item_total)
+
