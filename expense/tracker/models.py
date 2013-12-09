@@ -46,5 +46,10 @@ class Item(models.Model):
         super(Item,self).save()
         self.invoice.save()
 
+    def delete(self, **kwargs):
+        logger.info("Deleting an item!")
+        super(Item,self).delete()
+        self.invoice.save()
+
     def __unicode__(self):
         return '%s x %s' % (self.quantity, self.name)
