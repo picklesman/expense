@@ -5,6 +5,7 @@ from .models import Store, Invoice, Item
 class ItemInline(admin.TabularInline):
     model = Item
     fk_name = 'invoice'
+    readonly_fields = ('item_total',)
 
 class InvoiceAdmin(admin.ModelAdmin):
 
@@ -16,8 +17,10 @@ class InvoiceAdmin(admin.ModelAdmin):
            ItemInline,
            ]
 
+class ItemAdmin(admin.ModelAdmin):
+    readonly_fields = ('item_total',)
 
 admin.site.register(Store)
 admin.site.register(Invoice, InvoiceAdmin)
-admin.site.register(Item)
+admin.site.register(Item, ItemAdmin)
 
