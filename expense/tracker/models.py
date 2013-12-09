@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Sum
+from decimal import Decimal
 import logging
 
 logger = logging.getLogger(__name__)
@@ -29,6 +31,16 @@ class Invoice(models.Model):
             total += invoice.price * invoice.quantity
 
         return total
+    def calc_subtotal(self):
+        return self.item_set.all().aggregate(Sum('item_total'))['item_total__sum']
+   
+    def calc_total(self):
+        return self.subtotal * Decimal(1.14975)
+    
+    def save(self, **kwargs):
+        self.subtotal = self.calc_subtotal()
+        self.total = self.calc_total()
+        super(Invoice,self).save()
 
 class Item(models.Model):
     name = models.CharField(max_length=255)
