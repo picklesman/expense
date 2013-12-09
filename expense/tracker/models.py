@@ -33,6 +33,7 @@ class Item(models.Model):
     invoice = models.ForeignKey(Invoice,null=False)
     price = models.DecimalField(max_digits=6,decimal_places=2)
     quantity = models.PositiveSmallIntegerField(default=1)
+    item_total = models.DecimalField(max_digits=6, decimal_places=2, default=0)
 
     def save(self):
         logger.info("Saving an item!") 
