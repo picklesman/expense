@@ -20,17 +20,8 @@ class Invoice(models.Model):
     total = models.DecimalField(max_digits=6, decimal_places=2, default=0)
 
     def __unicode__(self):
-        return '%s at %s on %s' % (self.total(), self.store.name, self.date)
+        return '%s at %s on %s' % (self.total, self.store.name, self.date)
 
-    def total(self):
-
-        all_invoices = self.item_set.all()
-
-        total = 0
-        for invoice in all_invoices:
-            total += invoice.price * invoice.quantity
-
-        return total
     def calc_subtotal(self):
         return self.item_set.all().aggregate(Sum('item_total'))['item_total__sum']
    
