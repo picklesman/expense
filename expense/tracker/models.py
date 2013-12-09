@@ -44,6 +44,7 @@ class Item(models.Model):
         logger.info("Saving an item!")
         self.item_total = self.quantity * self.price
         super(Item,self).save()
+        self.invoice.save()
 
     def __unicode__(self):
         return '%s x %s' % (self.quantity, self.name)
