@@ -16,8 +16,8 @@ class Store(models.Model):
 class Invoice(models.Model):
     date = models.DateField()
     store = models.ForeignKey(Store, null=False)
-    subtotal = models.DecimalField(max_digits=6, decimal_places=2, default=0)
-    total = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    subtotal = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+    total = models.DecimalField(max_digits=8, decimal_places=2, default=0)
 
     def __unicode__(self):
         return '%s at %s on %s' % (self.total, self.store.name, self.date)
@@ -36,9 +36,9 @@ class Invoice(models.Model):
 class Item(models.Model):
     name = models.CharField(max_length=255)
     invoice = models.ForeignKey(Invoice,null=False)
-    price = models.DecimalField(max_digits=6,decimal_places=2)
+    price = models.DecimalField(max_digits=8,decimal_places=2)
     quantity = models.PositiveSmallIntegerField(default=1)
-    item_total = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    item_total = models.DecimalField(max_digits=8, decimal_places=2, default=0)
 
     def save(self, **kwargs):
         logger.info("Saving an item!")
