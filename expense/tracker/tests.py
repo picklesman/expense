@@ -20,9 +20,6 @@ class ItemTestCase(TestCase):
         quantity = 4
         total = price * quantity
 
-        item = Item.objects.create(name="orange glasses", 
-                                   price=price,
-                                   quantity=quantity,
-                                   invoice=self.invoice)
+        item = self.create_item(price,quantity)
 
         self.assertEqual(item.item_total, total)
