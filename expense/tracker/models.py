@@ -23,7 +23,7 @@ class Invoice(models.Model):
         return '%s at %s on %s' % (self.total, self.store.name, self.date)
 
     def calc_subtotal(self):
-        return self.item_set.all().aggregate(Sum('item_total'))['item_total__sum']
+        return self.item_set.all().aggregate(Sum('item_total'))['item_total__sum'] or 0
    
     def calc_total(self):
         return self.subtotal * Decimal(1.14975)
