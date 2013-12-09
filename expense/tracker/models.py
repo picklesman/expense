@@ -14,6 +14,8 @@ class Store(models.Model):
 class Invoice(models.Model):
     date = models.DateField()
     store = models.ForeignKey(Store, null=False)
+    subtotal = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    total = models.DecimalField(max_digits=6, decimal_places=2, default=0)
 
     def __unicode__(self):
         return '%s at %s on %s' % (self.total(), self.store.name, self.date)
