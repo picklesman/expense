@@ -31,5 +31,8 @@ class Item(models.Model):
     price = models.DecimalField(max_digits=6,decimal_places=2)
     quantity = models.PositiveSmallIntegerField(default=1)
 
+    def save(self):
+        super(Item,self).save()
+
     def __unicode__(self):
         return '%s x %s' % (self.quantity, self.name)
