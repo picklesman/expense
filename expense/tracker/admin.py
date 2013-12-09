@@ -11,7 +11,7 @@ class InvoiceAdmin(admin.ModelAdmin):
 
    list_display = ('store', 'total', 'date')
    list_filter = ('store', 'date')
-
+   readonly_fields = ('subtotal', 'total')
 
    inlines = [
            ItemInline,
