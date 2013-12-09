@@ -1,4 +1,7 @@
 from django.db import models
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Create your models here.
 
@@ -32,6 +35,7 @@ class Item(models.Model):
     quantity = models.PositiveSmallIntegerField(default=1)
 
     def save(self):
+        logger.info("Saving an item!") 
         super(Item,self).save()
 
     def __unicode__(self):
