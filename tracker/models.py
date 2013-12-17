@@ -19,6 +19,8 @@ class Invoice(models.Model):
     subtotal = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     total = models.DecimalField(max_digits=8, decimal_places=2, default=0)
 
+    TAX_RATE = Decimal(1.14975)
+
     def __unicode__(self):
         return '%s at %s on %s' % (self.total, self.store.name, self.date)
 
@@ -26,7 +28,7 @@ class Invoice(models.Model):
         return self.item_set.all().aggregate(Sum('item_total'))['item_total__sum'] or 0
    
     def calc_total(self):
-        return self.subtotal * Decimal(1.14975)
+        return self.subtotal * Invoice.TAX_RATE
     
     def save(self, **kwargs):
         self.subtotal = self.calc_subtotal()
