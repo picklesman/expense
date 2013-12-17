@@ -1,5 +1,6 @@
 from django.test import TestCase
 from tracker.models import Item,Invoice,Store
+from decimal import Decimal
 
 # Create your tests here.
 class ItemTestCase(TestCase):
@@ -46,3 +47,12 @@ class ItemTestCase(TestCase):
 
         self.assertEqual(invoice.subtotal, second.item_total)
 
+    def test_invoice_total_is_correct(self):
+
+        first = self.create_item(10,3)
+        second = self.create_item(20, 1)
+
+        subtotal = 10*3 + 20
+        total = subtotal * 1.14975
+
+        self.assertEqual(self.invoice.total.quantize(Decimal(0.00)), Decimal(total).quantize(Decimal(0.00)))
