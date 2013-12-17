@@ -53,6 +53,6 @@ class ItemTestCase(TestCase):
         second = self.create_item(20, 1)
 
         subtotal = 10*3 + 20
-        total = subtotal * 1.14975
+        total = subtotal * Invoice.TAX_RATE
 
         self.assertEqual(self.invoice.total.quantize(Decimal(0.00)), Decimal(total).quantize(Decimal(0.00)))
