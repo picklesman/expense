@@ -3,6 +3,8 @@ from django.db.models import Sum
 from decimal import Decimal
 import logging
 
+from users.models import CustomUser
+
 logger = logging.getLogger(__name__)
 
 # Create your models here.
@@ -18,6 +20,7 @@ class Invoice(models.Model):
     store = models.ForeignKey(Store, null=False)
     subtotal = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     total = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+    user = models.ForeignKey(CustomUser)
 
     TAX_RATE = Decimal(1.14975)
 
