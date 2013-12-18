@@ -33,6 +33,9 @@ ALLOWED_HOSTS = []
 # Custom User
 AUTH_USER_MODEL = "users.CustomUser"
 
+# Login redirect
+LOGIN_REDIRECT_URL = '/invoices/'
+
 # Application definition
 
 INSTALLED_APPS = (
