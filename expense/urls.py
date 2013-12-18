@@ -12,4 +12,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^invoices/$', InvoiceListView.as_view()),
     url(r'^login/$', 'django.contrib.auth.views.login'),
+    url(r'^logout/$', 'users.views.user_logout'), 
 )
